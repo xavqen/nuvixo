@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BookOpen, ShoppingBag, Users, ArrowUpRight, DollarSign, Eye } from "lucide-react";
 import { formatPrice, formatDate } from "@/lib/utils";
 
-export const metadata = { title: "Admin Dashboard – Nuvixo" };
+export const metadata = { title: "Admin Dashboard – Studiya" };
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {

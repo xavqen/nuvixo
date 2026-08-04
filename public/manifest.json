@@ -1,6 +1,6 @@
 {
-  "name": "Nuvixo",
-  "short_name": "Nuvixo",
+  "name": "Studiya",
+  "short_name": "Studiya",
   "description": "Premium NCERT Notes for Class 6–12",
   "start_url": "/",
   "display": "standalone",
@@ -16,7 +16,7 @@
     { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
   ],
   "screenshots": [
-    { "src": "/screenshots/home.png", "sizes": "1280x720", "type": "image/png", "label": "Nuvixo Homepage" }
+    { "src": "/screenshots/home.png", "sizes": "1280x720", "type": "image/png", "label": "Studiya Homepage" }
   ],
   "shortcuts": [
     {

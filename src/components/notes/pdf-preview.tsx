@@ -109,7 +109,7 @@ export function PDFPreview({ noteId, title, onClose, onPurchase }: PDFPreviewPro
 
                 {/* Watermark */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.04] rotate-[-35deg] text-4xl font-bold text-black select-none">
-                  NUVIXO PREVIEW
+                  STUDIYA PREVIEW
                 </div>
               </div>
             )}

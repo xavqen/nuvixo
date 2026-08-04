@@ -21,33 +21,33 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXTAUTH_URL ?? "https://nuvixo.com"),
+  metadataBase: new URL(process.env.NEXTAUTH_URL ?? "https://studiya.com"),
   title: {
-    default: "Nuvixo – Premium NCERT Notes for Class 6 to 12",
-    template: "%s | Nuvixo",
+    default: "Studiya – Premium NCERT Notes for Class 6 to 12",
+    template: "%s | Studiya",
   },
   description:
     "Premium NCERT notes for Class 6–12. Well-structured, exam-ready study material for Science, Maths, English, and more. Download PDF notes, read online.",
-  keywords: ["NCERT notes", "class 6 science notes", "CBSE notes", "study material", "nuvixo"],
-  authors: [{ name: "Nuvixo Team" }],
-  creator: "Nuvixo",
-  publisher: "Nuvixo",
+  keywords: ["NCERT notes", "class 6 science notes", "CBSE notes", "study material", "studiya"],
+  authors: [{ name: "Studiya Team" }],
+  creator: "Studiya",
+  publisher: "Studiya",
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "/",
-    siteName: "Nuvixo",
-    title: "Nuvixo – Premium NCERT Notes",
+    siteName: "Studiya",
+    title: "Studiya – Premium NCERT Notes",
     description: "Study smarter with premium NCERT notes for Class 6–12.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Nuvixo" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Studiya" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nuvixo – Premium NCERT Notes",
+    title: "Studiya – Premium NCERT Notes",
     description: "Study smarter with premium NCERT notes for Class 6–12.",
     images: ["/og-image.png"],
-    creator: "@nuvixo",
+    creator: "@studiya",
   },
   manifest: "/manifest.json",
   icons: {

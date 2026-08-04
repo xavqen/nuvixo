@@ -10,7 +10,7 @@ const reviews = [
     name: "Aarav Sharma",
     class: "Class 6, Delhi",
     rating: 5,
-    text: "These notes are incredibly well-structured! The Class 6 Science notes helped me understand food and nutrition perfectly. My exam scores improved from 70% to 95% after using Nuvixo!",
+    text: "These notes are incredibly well-structured! The Class 6 Science notes helped me understand food and nutrition perfectly. My exam scores improved from 70% to 95% after using Studiya!",
     avatar: "AS",
   },
   {
@@ -45,7 +45,7 @@ const reviews = [
     name: "Kavya Reddy",
     class: "Class 9, Hyderabad",
     rating: 5,
-    text: "Nuvixo has completely changed how I study. The structured notes with key points highlighted save so much time during revision. 100% recommended for CBSE students!",
+    text: "Studiya has completely changed how I study. The structured notes with key points highlighted save so much time during revision. 100% recommended for CBSE students!",
     avatar: "KR",
   },
 ];
@@ -62,7 +62,7 @@ export function StudentReviews() {
         >
           <h2 className="font-heading text-3xl font-bold mb-3">What Students Say</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Join 10,000+ students who are already scoring higher with Nuvixo
+            Join 10,000+ students who are already scoring higher with Studiya
           </p>
           <div className="flex items-center justify-center gap-2 mt-4">
             {[1, 2, 3, 4, 5].map((s) => (

@@ -39,7 +39,7 @@ export function SearchModal({ open, onClose }: { open: boolean; onClose: () => v
   const debouncedQuery = useDebounce(query, 300);
 
   useEffect(() => {
-    const stored = localStorage.getItem("nuvixo_recent_searches");
+    const stored = localStorage.getItem("studiya_recent_searches");
     if (stored) setRecentSearches(JSON.parse(stored));
   }, []);
 
@@ -73,7 +73,7 @@ export function SearchModal({ open, onClose }: { open: boolean; onClose: () => v
   function saveRecentSearch(q: string) {
     const updated = [q, ...recentSearches.filter((s) => s !== q)].slice(0, 5);
     setRecentSearches(updated);
-    localStorage.setItem("nuvixo_recent_searches", JSON.stringify(updated));
+    localStorage.setItem("studiya_recent_searches", JSON.stringify(updated));
   }
 
   function handleSubmit(e: React.FormEvent) {

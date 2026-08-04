@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
   const verificationUrl = `${process.env.NEXTAUTH_URL}/auth/verify?token=${token}`;
   await sendEmail({
     to: email,
-    subject: "Verify your Nuvixo account",
+    subject: "Verify your Studiya account",
     html: getVerificationEmailHtml(name, verificationUrl),
   });
 

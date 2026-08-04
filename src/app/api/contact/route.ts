@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   const { name, email, subject, message } = parsed.data;
 
   await sendEmail({
-    to: process.env.SMTP_FROM ?? "hello@nuvixo.com",
+    to: process.env.SMTP_FROM ?? "hello@studiya.com",
     subject: `[Contact Form] ${subject}`,
     html: `
       <h2>New Contact Form Submission</h2>

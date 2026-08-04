@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-violet-600 flex items-center justify-center shadow-md">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
-            <span className="gradient-text">Nuvixo</span>
+            <span className="gradient-text">Studiya</span>
           </Link>
           {sent ? (
             <>

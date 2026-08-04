@@ -2,7 +2,7 @@ interface BreadcrumbJsonLdProps {
   items: { name: string; url: string }[];
 }
 
-const BASE_URL = process.env.NEXTAUTH_URL ?? "https://nuvixo.com";
+const BASE_URL = process.env.NEXTAUTH_URL ?? "https://studiya.com";
 
 export function BreadcrumbJsonLd({ items }: BreadcrumbJsonLdProps) {
   const schema = {

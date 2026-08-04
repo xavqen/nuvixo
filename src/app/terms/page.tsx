@@ -11,7 +11,7 @@ export default function TermsPage() {
         <p className="text-muted-foreground">Last updated: {new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })}</p>
 
         <h2>1. Acceptance of Terms</h2>
-        <p>By accessing or using Nuvixo, you agree to be bound by these Terms of Service.</p>
+        <p>By accessing or using Studiya, you agree to be bound by these Terms of Service.</p>
 
         <h2>2. Account Registration</h2>
         <p>You must provide accurate information when creating an account. You are responsible for maintaining the confidentiality of your account credentials.</p>
@@ -26,13 +26,13 @@ export default function TermsPage() {
         <p>Refunds are governed by our <a href="/refund">Refund Policy</a>.</p>
 
         <h2>6. Limitation of Liability</h2>
-        <p>Nuvixo provides notes &quot;as is&quot; for educational purposes. We do not guarantee specific exam outcomes.</p>
+        <p>Studiya provides notes &quot;as is&quot; for educational purposes. We do not guarantee specific exam outcomes.</p>
 
         <h2>7. Changes to Terms</h2>
         <p>We may update these terms from time to time. Continued use of the platform constitutes acceptance of updated terms.</p>
 
         <h2>8. Contact</h2>
-        <p>Questions about these terms can be sent to hello@nuvixo.com.</p>
+        <p>Questions about these terms can be sent to hello@studiya.com.</p>
       </div>
     </MainLayout>
   );

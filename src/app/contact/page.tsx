@@ -8,8 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact Us – Nuvixo",
-  description: "Get in touch with the Nuvixo team. We're here to help with any questions about notes, payments, or your account.",
+  title: "Contact Us – Studiya",
+  description: "Get in touch with the Studiya team. We're here to help with any questions about notes, payments, or your account.",
 };
 
 export default function ContactPage() {
@@ -30,7 +30,7 @@ export default function ContactPage() {
               <h2 className="font-heading text-2xl font-bold mb-6">Contact Information</h2>
               <div className="space-y-5">
                 {[
-                  { icon: Mail,    label: "Email",    value: "hello@nuvixo.com",   href: "mailto:hello@nuvixo.com" },
+                  { icon: Mail,    label: "Email",    value: "hello@studiya.com",   href: "mailto:hello@studiya.com" },
                   { icon: Phone,   label: "Phone",    value: "+91 98765 43210",     href: "tel:+919876543210" },
                   { icon: MessageSquare, label: "WhatsApp", value: "Chat on WhatsApp", href: "https://wa.me/919876543210" },
                   { icon: MapPin,  label: "Address",  value: "New Delhi, India",    href: null },

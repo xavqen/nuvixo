@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
   if (user?.email) {
     sendEmail({
       to: user.email,
-      subject: "Purchase Confirmed – Nuvixo",
+      subject: "Purchase Confirmed – Studiya",
       html: getPurchaseConfirmationHtml(
         user.name ?? "Student",
         order.items.map((i) => ({ title: i.note.title })),

@@ -3,8 +3,8 @@ import { MainLayout } from "@/components/layout/main-layout";
 import { BookOpen, Target, Users, Award } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Nuvixo – Our Story",
-  description: "Learn about Nuvixo, India's premium NCERT notes platform built to help students study smarter and score higher.",
+  title: "About Studiya – Our Story",
+  description: "Learn about Studiya, India's premium NCERT notes platform built to help students study smarter and score higher.",
 };
 
 export default function AboutPage() {
@@ -16,10 +16,10 @@ export default function AboutPage() {
           <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-brand-500 to-violet-600 flex items-center justify-center mx-auto mb-6 shadow-premium">
             <BookOpen className="w-10 h-10 text-white" />
           </div>
-          <h1 className="font-heading text-4xl font-bold mb-4">About Nuvixo</h1>
+          <h1 className="font-heading text-4xl font-bold mb-4">About Studiya</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
             We believe every Indian student deserves access to high-quality study material. 
-            Nuvixo was built to make premium NCERT notes affordable, accessible, and effective.
+            Studiya was built to make premium NCERT notes affordable, accessible, and effective.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <h2>Our Story</h2>
           <p>
-            Nuvixo was founded with a single goal: make quality NCERT notes accessible to every student across India. 
+            Studiya was founded with a single goal: make quality NCERT notes accessible to every student across India. 
             We noticed that most students either struggled with poorly formatted notes or spent excessive time 
             making their own. We decided to fix that.
           </p>

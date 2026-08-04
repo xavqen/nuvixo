@@ -19,7 +19,7 @@ interface EmailOptions {
 
 export async function sendEmail({ to, subject, html, text }: EmailOptions) {
   await transporter.sendMail({
-    from: `"Nuvixo" <${process.env.SMTP_FROM ?? process.env.SMTP_USER}>`,
+    from: `"Studiya" <${process.env.SMTP_FROM ?? process.env.SMTP_USER}>`,
     to,
     subject,
     html,
@@ -35,7 +35,7 @@ export function getVerificationEmailHtml(name: string, verificationUrl: string):
     <body style="font-family: Inter, Arial, sans-serif; background: #f8fafc; padding: 40px 0;">
       <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
         <div style="background: linear-gradient(135deg, #3b82f6, #7c3aed); padding: 40px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Nuvixo</h1>
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Studiya</h1>
           <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0;">Premium NCERT Notes Platform</p>
         </div>
         <div style="padding: 40px;">
@@ -58,7 +58,7 @@ export function getPasswordResetEmailHtml(name: string, resetUrl: string): strin
     <body style="font-family: Inter, Arial, sans-serif; background: #f8fafc; padding: 40px 0;">
       <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
         <div style="background: linear-gradient(135deg, #3b82f6, #7c3aed); padding: 40px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Nuvixo</h1>
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Studiya</h1>
         </div>
         <div style="padding: 40px;">
           <h2 style="color: #1e293b; margin: 0 0 16px;">Reset your password</h2>
@@ -86,7 +86,7 @@ export function getPurchaseConfirmationHtml(
     <body style="font-family: Inter, Arial, sans-serif; background: #f8fafc; padding: 40px 0;">
       <div style="max-width: 600px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
         <div style="background: linear-gradient(135deg, #3b82f6, #7c3aed); padding: 40px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Nuvixo</h1>
+          <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Studiya</h1>
           <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0; font-size: 18px;">Payment Confirmed ✓</p>
         </div>
         <div style="padding: 40px;">

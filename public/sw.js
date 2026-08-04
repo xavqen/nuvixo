@@ -1,4 +1,4 @@
-const CACHE_NAME = "nuvixo-v1";
+const CACHE_NAME = "studiya-v1";
 const STATIC_ASSETS = [
   "/",
   "/notes",

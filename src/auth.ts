@@ -84,7 +84,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         await prisma.notification.create({
           data: {
             userId: user.id,
-            title: "Welcome to Nuvixo! 🎉",
+            title: "Welcome to Studiya! 🎉",
             message: "Start exploring premium NCERT notes. Your first purchase comes with special savings!",
             type: "success",
             link: "/notes",

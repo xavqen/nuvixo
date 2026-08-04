@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
   const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
   await sendEmail({
     to: email,
-    subject: "Reset your Nuvixo password",
+    subject: "Reset your Studiya password",
     html: getPasswordResetEmailHtml(user.name ?? "User", resetUrl),
   });
 

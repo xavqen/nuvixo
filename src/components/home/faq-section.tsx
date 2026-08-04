@@ -7,8 +7,8 @@ import {
 
 const faqs = [
   {
-    q: "What is Nuvixo?",
-    a: "Nuvixo is India's premium NCERT notes platform offering well-structured, exam-ready study material for Class 6–12 students. You can browse, preview, purchase, and read notes online or download PDFs.",
+    q: "What is Studiya?",
+    a: "Studiya is India's premium NCERT notes platform offering well-structured, exam-ready study material for Class 6–12 students. You can browse, preview, purchase, and read notes online or download PDFs.",
   },
   {
     q: "Are there any free notes available?",
@@ -32,15 +32,15 @@ const faqs = [
   },
   {
     q: "What if I'm not satisfied with the notes?",
-    a: "We offer a 7-day refund policy if the notes don't meet the described quality. Contact support at hello@nuvixo.com with your order ID.",
+    a: "We offer a 7-day refund policy if the notes don't meet the described quality. Contact support at hello@studiya.com with your order ID.",
   },
   {
     q: "Are the notes updated with the latest NCERT syllabus?",
     a: "Yes. Our notes are regularly reviewed and updated to reflect the latest NCERT curriculum changes. The last updated date is shown on every note page.",
   },
   {
-    q: "Is Nuvixo available on mobile?",
-    a: "Nuvixo is fully responsive and works on all devices. You can also install it as a Progressive Web App (PWA) on your phone for an app-like experience.",
+    q: "Is Studiya available on mobile?",
+    a: "Studiya is fully responsive and works on all devices. You can also install it as a Progressive Web App (PWA) on your phone for an app-like experience.",
   },
 ];
 
@@ -55,7 +55,7 @@ export function FAQSection() {
           className="text-center mb-14"
         >
           <h2 className="font-heading text-3xl font-bold mb-3">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground">Everything you need to know about Nuvixo</p>
+          <p className="text-muted-foreground">Everything you need to know about Studiya</p>
         </motion.div>
 
         <div className="max-w-3xl mx-auto">

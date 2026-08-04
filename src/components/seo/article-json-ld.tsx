@@ -10,7 +10,7 @@ interface ArticleJsonLdProps {
   };
 }
 
-const BASE_URL = process.env.NEXTAUTH_URL ?? "https://nuvixo.com";
+const BASE_URL = process.env.NEXTAUTH_URL ?? "https://studiya.com";
 
 export function ArticleJsonLd({ post }: ArticleJsonLdProps) {
   const schema = {
@@ -24,12 +24,12 @@ export function ArticleJsonLd({ post }: ArticleJsonLdProps) {
     "image": post.coverUrl ?? `${BASE_URL}/og-image.png`,
     "author": {
       "@type": "Organization",
-      "name": "Nuvixo Team",
+      "name": "Studiya Team",
       "url": BASE_URL,
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Nuvixo",
+      "name": "Studiya",
       "logo": { "@type": "ImageObject", "url": `${BASE_URL}/icon-512.png` },
     },
     ...(post.category && {

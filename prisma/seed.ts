@@ -9,11 +9,11 @@ async function main() {
   // Admin user
   const adminPassword = await bcrypt.hash("Admin@123456", 12);
   const admin = await prisma.user.upsert({
-    where: { email: "admin@nuvixo.com" },
+    where: { email: "admin@studiya.com" },
     update: {},
     create: {
-      name: "Nuvixo Admin",
-      email: "admin@nuvixo.com",
+      name: "Studiya Admin",
+      email: "admin@studiya.com",
       password: adminPassword,
       role: Role.SUPER_ADMIN,
       emailVerified: new Date(),
@@ -160,7 +160,7 @@ async function main() {
         isNew: true,
         tags: ["class 6", "science", "ncert", chapter.title.toLowerCase(), "notes", "ncert solutions"],
         keywords: ["NCERT Class 6 Science", chapter.title, "Class 6 Science Notes", "NCERT Notes"],
-        metaTitle: `NCERT Class 6 Science Chapter ${chapter.number} Notes – ${chapter.title} | Nuvixo`,
+        metaTitle: `NCERT Class 6 Science Chapter ${chapter.number} Notes – ${chapter.title} | Studiya`,
         metaDescription: `Download NCERT Class 6 Science Chapter ${chapter.number} – ${chapter.title} notes. Well-structured, exam-ready notes with key points and diagrams.`,
         publishedAt: new Date(),
       },
@@ -170,9 +170,9 @@ async function main() {
 
   // Settings
   const settingsData = [
-    { key: "site_name", value: "Nuvixo", type: "string", group: "general", label: "Site Name" },
+    { key: "site_name", value: "Studiya", type: "string", group: "general", label: "Site Name" },
     { key: "site_tagline", value: "Premium NCERT Notes Platform", type: "string", group: "general", label: "Site Tagline" },
-    { key: "site_email", value: "hello@nuvixo.com", type: "string", group: "general", label: "Site Email" },
+    { key: "site_email", value: "hello@studiya.com", type: "string", group: "general", label: "Site Email" },
     { key: "site_phone", value: "+91 98765 43210", type: "string", group: "general", label: "Site Phone" },
     { key: "razorpay_key_id", value: "", type: "string", group: "payment", label: "Razorpay Key ID" },
     { key: "gst_rate", value: "18", type: "number", group: "payment", label: "GST Rate (%)" },

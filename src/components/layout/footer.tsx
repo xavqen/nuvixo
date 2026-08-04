@@ -44,7 +44,7 @@ export function Footer() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 flex items-center justify-center">
                 <BookOpen className="w-4 h-4 text-white" />
               </div>
-              <span className="gradient-text">Nuvixo</span>
+              <span className="gradient-text">Studiya</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-6 max-w-xs leading-relaxed">
               India&apos;s premium NCERT notes platform. Study smarter with well-structured, 
@@ -53,8 +53,8 @@ export function Footer() {
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <a href="mailto:hello@nuvixo.com" className="hover:text-foreground transition-colors">
-                  hello@nuvixo.com
+                <a href="mailto:hello@studiya.com" className="hover:text-foreground transition-colors">
+                  hello@studiya.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -70,10 +70,10 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-3 mt-6">
               {[
-                { icon: Twitter, href: "https://twitter.com/nuvixo",    label: "Twitter" },
-                { icon: Instagram, href: "https://instagram.com/nuvixo", label: "Instagram" },
-                { icon: Youtube, href: "https://youtube.com/@nuvixo",   label: "YouTube" },
-                { icon: Facebook, href: "https://facebook.com/nuvixo",  label: "Facebook" },
+                { icon: Twitter, href: "https://twitter.com/studiya",    label: "Twitter" },
+                { icon: Instagram, href: "https://instagram.com/studiya", label: "Instagram" },
+                { icon: Youtube, href: "https://youtube.com/@studiya",   label: "YouTube" },
+                { icon: Facebook, href: "https://facebook.com/studiya",  label: "Facebook" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -118,7 +118,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-border">
         <div className="container py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {currentYear} Nuvixo. All rights reserved.</p>
+          <p>© {currentYear} Studiya. All rights reserved.</p>
           <p className="text-xs">
             Made with ❤️ for students across India
           </p>

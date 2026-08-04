@@ -19,7 +19,7 @@ interface NoteJsonLdProps {
   reviewCount: number;
 }
 
-const BASE_URL = process.env.NEXTAUTH_URL ?? "https://nuvixo.com";
+const BASE_URL = process.env.NEXTAUTH_URL ?? "https://studiya.com";
 
 export function NoteJsonLd({ note, avgRating, reviewCount }: NoteJsonLdProps) {
   const schema = {
@@ -36,7 +36,7 @@ export function NoteJsonLd({ note, avgRating, reviewCount }: NoteJsonLdProps) {
     "dateModified": note.updatedAt.toISOString(),
     "publisher": {
       "@type": "Organization",
-      "name": "Nuvixo",
+      "name": "Studiya",
       "url": BASE_URL,
     },
     "educationalLevel": note.class.name,

@@ -52,7 +52,7 @@ export function WhyChooseUs() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <h2 className="font-heading text-3xl font-bold mb-3">Why Students Love Nuvixo</h2>
+          <h2 className="font-heading text-3xl font-bold mb-3">Why Students Love Studiya</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             We&apos;re not just a notes platform — we&apos;re your study partner designed to help you succeed.
           </p>

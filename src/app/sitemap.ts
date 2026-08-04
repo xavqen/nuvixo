@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-const BASE_URL = process.env.NEXTAUTH_URL ?? "https://nuvixo.com";
+const BASE_URL = process.env.NEXTAUTH_URL ?? "https://studiya.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [notes, blogPosts, classes, subjects] = await Promise.all([

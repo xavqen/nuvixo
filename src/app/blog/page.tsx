@@ -10,7 +10,7 @@ import { ArticleJsonLd } from "@/components/seo/article-json-ld";
 
 export const metadata: Metadata = {
   title: "Blog – Study Tips, NCERT Guides & Exam Prep",
-  description: "Read study tips, NCERT guides, exam preparation articles and more on the Nuvixo blog.",
+  description: "Read study tips, NCERT guides, exam preparation articles and more on the Studiya blog.",
 };
 
 export const dynamic = "force-dynamic";
@@ -37,7 +37,7 @@ export default async function BlogPage() {
     <MainLayout>
       <div className="container py-12">
         <div className="mb-12 text-center">
-          <h1 className="font-heading text-4xl font-bold mb-3">Nuvixo Blog</h1>
+          <h1 className="font-heading text-4xl font-bold mb-3">Studiya Blog</h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Study tips, NCERT guides, exam strategies and more for Indian students.
           </p>

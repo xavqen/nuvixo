@@ -21,7 +21,7 @@ export async function getSignedPdfUrl(publicId: string, expiresIn = 3600): Promi
 
 export async function uploadPdf(
   filePath: string,
-  folder: string = "nuvixo/pdfs"
+  folder: string = "studiya/pdfs"
 ): Promise<{ publicId: string; secureUrl: string; pages: number }> {
   const result = await cloudinary.uploader.upload(filePath, {
     resource_type: "raw",
@@ -40,7 +40,7 @@ export async function uploadPdf(
 
 export async function uploadImage(
   filePath: string,
-  folder: string = "nuvixo/covers"
+  folder: string = "studiya/covers"
 ): Promise<{ publicId: string; url: string }> {
   const result = await cloudinary.uploader.upload(filePath, {
     folder,

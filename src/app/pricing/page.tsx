@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Pricing – Nuvixo NCERT Notes",
+  title: "Pricing – Studiya NCERT Notes",
   description: "Affordable pricing for premium NCERT notes. Buy individual chapter notes or save with bundles. Lifetime access guaranteed.",
 };
 
@@ -140,7 +140,7 @@ export default function PricingPage() {
           <h2 className="font-heading text-2xl font-bold text-center mb-8">Pricing FAQ</h2>
           <div className="space-y-4">
             {[
-              { q: "Is there a subscription?", a: "No. Nuvixo uses a one-time purchase model. Pay once, own forever." },
+              { q: "Is there a subscription?", a: "No. Studiya uses a one-time purchase model. Pay once, own forever." },
               { q: "Can I get a refund?", a: "Yes. We offer a 7-day money-back guarantee if you're not satisfied with the quality." },
               { q: "Are there student discounts?", a: "Yes! Use coupon codes from our newsletter or social media for up to 50% off." },
               { q: "What payment methods are accepted?", a: "UPI, credit/debit cards, net banking, and popular wallets via Razorpay." },

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-const BASE_URL = process.env.NEXTAUTH_URL ?? "https://nuvixo.com";
+const BASE_URL = process.env.NEXTAUTH_URL ?? "https://studiya.com";
 
 export async function GET() {
   const posts = await prisma.blogPost.findMany({
@@ -19,7 +19,7 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nuvixo Blog – NCERT Notes &amp; Study Tips</title>
+    <title>Studiya Blog – NCERT Notes &amp; Study Tips</title>
     <link>${BASE_URL}/blog</link>
     <description>Premium NCERT study tips, exam prep guides, and educational articles for Class 6–12 students.</description>
     <language>en-IN</language>

@@ -66,7 +66,7 @@ export function Navbar() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 flex items-center justify-center">
               <BookOpen className="w-4 h-4 text-white" />
             </div>
-            <span className="gradient-text">Nuvixo</span>
+            <span className="gradient-text">Studiya</span>
           </Link>
 
           {/* Desktop Nav */}

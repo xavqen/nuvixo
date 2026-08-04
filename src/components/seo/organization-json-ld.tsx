@@ -1,11 +1,11 @@
-const BASE_URL = process.env.NEXTAUTH_URL ?? "https://nuvixo.com";
+const BASE_URL = process.env.NEXTAUTH_URL ?? "https://studiya.com";
 
 export function OrganizationJsonLd() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${BASE_URL}/#organization`,
-    "name": "Nuvixo",
+    "name": "Studiya",
     "url": BASE_URL,
     "logo": {
       "@type": "ImageObject",
@@ -17,14 +17,14 @@ export function OrganizationJsonLd() {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer support",
-      "email": "hello@nuvixo.com",
+      "email": "hello@studiya.com",
       "availableLanguage": ["English", "Hindi"],
     },
     "sameAs": [
-      "https://twitter.com/nuvixo",
-      "https://instagram.com/nuvixo",
-      "https://youtube.com/@nuvixo",
-      "https://facebook.com/nuvixo",
+      "https://twitter.com/studiya",
+      "https://instagram.com/studiya",
+      "https://youtube.com/@studiya",
+      "https://facebook.com/studiya",
     ],
   };
 
@@ -42,7 +42,7 @@ export function WebsiteJsonLd() {
     "@type": "WebSite",
     "@id": `${BASE_URL}/#website`,
     "url": BASE_URL,
-    "name": "Nuvixo",
+    "name": "Studiya",
     "description": "Premium NCERT Notes for Class 6–12",
     "publisher": { "@id": `${BASE_URL}/#organization` },
     "potentialAction": {

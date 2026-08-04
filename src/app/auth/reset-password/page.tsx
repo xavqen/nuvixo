@@ -54,7 +54,7 @@ function ResetPasswordFormContent() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-violet-600 flex items-center justify-center">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
-            <span className="gradient-text">Nuvixo</span>
+            <span className="gradient-text">Studiya</span>
           </Link>
           <h1 className="font-heading text-2xl font-bold">Set new password</h1>
           <p className="text-muted-foreground text-sm mt-1">Choose a strong password for your account.</p>

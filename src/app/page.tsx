@@ -14,7 +14,7 @@ import { AnnouncementBanner } from "@/components/home/announcement-banner";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "Nuvixo – Premium NCERT Notes for Class 6 to 12",
+  title: "Studiya – Premium NCERT Notes for Class 6 to 12",
   description:
     "Study smarter with premium, exam-ready NCERT notes for Class 6–12. Science, Maths, English, Social Science and more. Download PDF or read online.",
 };

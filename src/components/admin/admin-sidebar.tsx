@@ -49,7 +49,7 @@ export function AdminSidebar({ user }: { user: { name?: string | null; email?: s
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-400 to-violet-400 flex items-center justify-center">
             <BookMarked className="w-4 h-4 text-white" />
           </div>
-          <span>Nuvixo Admin</span>
+          <span>Studiya Admin</span>
         </Link>
       </div>
 

@@ -26,10 +26,10 @@ export default function PrivacyPage() {
         <p>We implement industry-standard security measures including SSL encryption, secure password hashing, and signed URLs for content protection.</p>
 
         <h2>6. Your Rights</h2>
-        <p>You may request access, correction, or deletion of your personal data by contacting hello@nuvixo.com.</p>
+        <p>You may request access, correction, or deletion of your personal data by contacting hello@studiya.com.</p>
 
         <h2>7. Contact Us</h2>
-        <p>For privacy-related questions, contact us at hello@nuvixo.com.</p>
+        <p>For privacy-related questions, contact us at hello@studiya.com.</p>
       </div>
     </MainLayout>
   );

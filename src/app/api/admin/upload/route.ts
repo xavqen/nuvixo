@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   const base64 = buffer.toString("base64");
   const dataUri = `data:${file.type};base64,${base64}`;
 
-  const folder = type === "pdf" ? "nuvixo/pdfs" : "nuvixo/covers";
+  const folder = type === "pdf" ? "studiya/pdfs" : "studiya/covers";
   const resourceType = type === "pdf" ? "raw" : "image";
 
   const result = await cloudinary.uploader.upload(dataUri, {

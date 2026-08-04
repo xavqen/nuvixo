@@ -109,7 +109,7 @@ export function PurchaseModal({ note, onClose }: PurchaseModalProps) {
         key: data.keyId,
         amount: data.amount * 100,
         currency: data.currency,
-        name: "Nuvixo",
+        name: "Studiya",
         description: note.title,
         order_id: data.razorpayOrderId,
         prefill: {

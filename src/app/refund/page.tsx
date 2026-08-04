@@ -19,7 +19,7 @@ export default function RefundPage() {
         </ul>
 
         <h2>How to Request a Refund</h2>
-        <p>Email hello@nuvixo.com with your order ID and reason for the refund request. Our team will review and respond within 2 business days.</p>
+        <p>Email hello@studiya.com with your order ID and reason for the refund request. Our team will review and respond within 2 business days.</p>
 
         <h2>Processing Time</h2>
         <p>Approved refunds are processed within 5–7 business days and credited back to your original payment method via Razorpay.</p>

@@ -24,7 +24,7 @@ export function NewsletterSection() {
       });
       if (res.ok) {
         setDone(true);
-        toast.success("Subscribed! Welcome to Nuvixo newsletter.");
+        toast.success("Subscribed! Welcome to Studiya newsletter.");
       } else {
         toast.error("Something went wrong. Try again.");
       }
