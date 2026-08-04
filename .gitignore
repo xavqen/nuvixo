@@ -1,0 +1,17 @@
+node_modules/
+.next/
+.env
+.env.local
+.env.production
+*.log
+npm-debug.log*
+.DS_Store
+.vercel/
+coverage/
+.nyc_output/
+prisma/dev.db
+*.sqlite
+public/uploads/
+dist/
+build/
+*.tsbuildinfo

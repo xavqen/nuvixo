@@ -1,0 +1,605 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum Language {
+  ENGLISH
+  HINDI
+  BENGALI
+  TELUGU
+  MARATHI
+  TAMIL
+  GUJARATI
+  KANNADA
+  MALAYALAM
+  PUNJABI
+  ODIA
+  URDU
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum NotificationStatus {
+  UNREAD
+  READ
+}
+
+// ─── User ─────────────────────────────────────────────────────────────────────
+
+model User {
+  id              String    @id @default(cuid())
+  name            String?
+  email           String    @unique
+  emailVerified   DateTime?
+  image           String?
+  password        String?
+  role            Role      @default(USER)
+  phone           String?
+  bio             String?
+  referralCode    String?   @unique @default(cuid())
+  referredBy      String?
+  newsletterSub   Boolean   @default(false)
+  twoFactorEnabled Boolean  @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  accounts        Account[]
+  sessions        Session[]
+  orders          Order[]
+  reviews         Review[]
+  wishlists       Wishlist[]
+  bookmarks       Bookmark[]
+  readingHistory  ReadingHistory[]
+  notifications   Notification[]
+  invoices        Invoice[]
+  verificationTokens VerificationToken[]
+
+  @@index([email])
+  @@map("users")
+}
+
+// ─── Auth ─────────────────────────────────────────────────────────────────────
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  id         String   @id @default(cuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  userId     String?
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ─── Board / Class / Subject / Chapter ────────────────────────────────────────
+
+model Board {
+  id          String    @id @default(cuid())
+  name        String    @unique  // NCERT, CBSE, ICSE, Maharashtra Board, etc.
+  slug        String    @unique
+  description String?
+  logoUrl     String?
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  notes       Note[]
+
+  @@map("boards")
+}
+
+model Class {
+  id          String    @id @default(cuid())
+  name        String    // Class 6, Class 7, ... Class 12
+  numeral     Int       // 6, 7, 8, 9, 10, 11, 12
+  slug        String    @unique
+  description String?
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  subjects    ClassSubject[]
+  notes       Note[]
+
+  @@map("classes")
+}
+
+model Subject {
+  id          String    @id @default(cuid())
+  name        String    // Science, Mathematics, English, etc.
+  slug        String    @unique
+  description String?
+  icon        String?
+  color       String?   // hex color for UI
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  classes     ClassSubject[]
+  books       Book[]
+  notes       Note[]
+
+  @@map("subjects")
+}
+
+model ClassSubject {
+  id        String   @id @default(cuid())
+  classId   String
+  subjectId String
+  isActive  Boolean  @default(true)
+
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, subjectId])
+  @@map("class_subjects")
+}
+
+model Book {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  subjectId   String
+  description String?
+  coverUrl    String?
+  publisher   String?
+  edition     String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  subject     Subject   @relation(fields: [subjectId], references: [id])
+  chapters    Chapter[]
+  notes       Note[]
+
+  @@map("books")
+}
+
+model Chapter {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String
+  bookId      String
+  number      Int
+  description String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  book        Book      @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  notes       Note[]
+
+  @@unique([bookId, number])
+  @@map("chapters")
+}
+
+// ─── Notes ────────────────────────────────────────────────────────────────────
+
+model Note {
+  id                String     @id @default(cuid())
+  title             String
+  slug              String     @unique
+  description       String     @db.Text
+  shortDescription  String?
+
+  // Classification
+  classId           String
+  subjectId         String
+  bookId            String?
+  chapterId         String?
+  boardId           String
+
+  // Language
+  language          Language   @default(ENGLISH)
+
+  // PDF
+  pdfPublicId       String?    // Cloudinary public ID
+  pdfSecureUrl      String?    // Cloudinary secure URL (never exposed to clients)
+  previewPublicId   String?    // Cloudinary ID for preview pages
+  totalPages        Int?
+  previewPages      Int        @default(5)
+
+  // Cover
+  coverPublicId     String?
+  coverUrl          String?
+
+  // Pricing
+  price             Float      @default(0)
+  originalPrice     Float?
+  isFree            Boolean    @default(false)
+  isPremium         Boolean    @default(true)
+  isDownloadable    Boolean    @default(true)
+
+  // Meta
+  difficulty        Difficulty @default(MEDIUM)
+  tags              String[]
+  isPublished       Boolean    @default(false)
+  isFeatured        Boolean    @default(false)
+  isTrending        Boolean    @default(false)
+  isNew             Boolean    @default(true)
+  viewCount         Int        @default(0)
+  downloadCount     Int        @default(0)
+  purchaseCount     Int        @default(0)
+
+  // SEO
+  metaTitle         String?
+  metaDescription   String?
+  canonicalUrl      String?
+  ogImage           String?
+  keywords          String[]
+
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  publishedAt       DateTime?
+
+  // Relations
+  class             Class      @relation(fields: [classId], references: [id])
+  subject           Subject    @relation(fields: [subjectId], references: [id])
+  book              Book?      @relation(fields: [bookId], references: [id])
+  chapter           Chapter?   @relation(fields: [chapterId], references: [id])
+  board             Board      @relation(fields: [boardId], references: [id])
+
+  orderItems        OrderItem[]
+  reviews           Review[]
+  wishlists         Wishlist[]
+  bookmarks         Bookmark[]
+  readingHistory    ReadingHistory[]
+
+  @@index([slug])
+  @@index([classId, subjectId])
+  @@index([isPublished, isFeatured])
+  @@index([createdAt(sort: Desc)])
+  @@map("notes")
+}
+
+// ─── Orders & Payments ───────────────────────────────────────────────────────
+
+model Order {
+  id                String      @id @default(cuid())
+  userId            String
+  status            OrderStatus @default(PENDING)
+  totalAmount       Float
+  discount          Float       @default(0)
+  finalAmount       Float
+
+  // Razorpay
+  razorpayOrderId   String?     @unique
+  razorpayPaymentId String?     @unique
+  razorpaySignature String?
+
+  // Coupon
+  couponId          String?
+  couponCode        String?
+  couponDiscount    Float       @default(0)
+
+  // Metadata
+  paymentMethod     String?
+  paymentGateway    String      @default("razorpay")
+  notes             String?
+  refundReason      String?
+  refundedAt        DateTime?
+
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  user              User        @relation(fields: [userId], references: [id])
+  items             OrderItem[]
+  coupon            Coupon?     @relation(fields: [couponId], references: [id])
+  invoice           Invoice?
+
+  @@index([userId])
+  @@index([razorpayOrderId])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  noteId    String
+  price     Float
+  createdAt DateTime @default(now())
+
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  note      Note     @relation(fields: [noteId], references: [id])
+
+  @@unique([orderId, noteId])
+  @@map("order_items")
+}
+
+model Invoice {
+  id             String   @id @default(cuid())
+  orderId        String   @unique
+  userId         String
+  invoiceNumber  String   @unique
+  amount         Float
+  tax            Float    @default(0)
+  totalAmount    Float
+  pdfUrl         String?
+  issuedAt       DateTime @default(now())
+  dueDate        DateTime?
+
+  order          Order    @relation(fields: [orderId], references: [id])
+  user           User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("invoices")
+}
+
+// ─── Coupons ─────────────────────────────────────────────────────────────────
+
+model Coupon {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  description     String?
+  discountType    String   @default("PERCENTAGE") // PERCENTAGE | FIXED
+  discountValue   Float
+  minOrderAmount  Float    @default(0)
+  maxDiscount     Float?
+  maxUses         Int?
+  usedCount       Int      @default(0)
+  isActive        Boolean  @default(true)
+  validFrom       DateTime
+  validUntil      DateTime
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  orders          Order[]
+
+  @@index([code])
+  @@map("coupons")
+}
+
+// ─── Reviews ─────────────────────────────────────────────────────────────────
+
+model Review {
+  id         String   @id @default(cuid())
+  userId     String
+  noteId     String
+  rating     Int      // 1–5
+  title      String?
+  body       String?  @db.Text
+  isVerified Boolean  @default(false) // verified purchase
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  note       Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, noteId])
+  @@index([noteId, isApproved])
+  @@map("reviews")
+}
+
+// ─── Wishlist & Bookmarks ────────────────────────────────────────────────────
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  noteId    String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  note      Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, noteId])
+  @@map("wishlists")
+}
+
+model Bookmark {
+  id         String   @id @default(cuid())
+  userId     String
+  noteId     String
+  page       Int?
+  title      String?
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  note       Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@index([userId, noteId])
+  @@map("bookmarks")
+}
+
+// ─── Reading History ──────────────────────────────────────────────────────────
+
+model ReadingHistory {
+  id           String   @id @default(cuid())
+  userId       String
+  noteId       String
+  currentPage  Int      @default(1)
+  totalPages   Int?
+  progress     Float    @default(0) // 0-100 percentage
+  lastReadAt   DateTime @default(now())
+  completedAt  DateTime?
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  note         Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, noteId])
+  @@index([userId, lastReadAt])
+  @@map("reading_history")
+}
+
+// ─── Blog ────────────────────────────────────────────────────────────────────
+
+model BlogCategory {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  color       String?
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+
+  posts       BlogPost[]
+
+  @@map("blog_categories")
+}
+
+model BlogPost {
+  id              String     @id @default(cuid())
+  title           String
+  slug            String     @unique
+  excerpt         String?    @db.Text
+  content         String     @db.Text
+  coverUrl        String?
+  coverPublicId   String?
+  authorId        String?
+  categoryId      String?
+  tags            String[]
+  status          BlogStatus @default(DRAFT)
+  readingTime     Int?       // in minutes
+  viewCount       Int        @default(0)
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  canonicalUrl    String?
+  ogImage         String?
+  keywords        String[]
+
+  publishedAt     DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  category        BlogCategory? @relation(fields: [categoryId], references: [id])
+
+  @@index([slug])
+  @@index([status, publishedAt])
+  @@map("blog_posts")
+}
+
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+model Notification {
+  id        String             @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String             @default("info") // info | success | warning | error
+  link      String?
+  status    NotificationStatus @default(UNREAD)
+  createdAt DateTime           @default(now())
+
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("notifications")
+}
+
+// ─── Newsletter ───────────────────────────────────────────────────────────────
+
+model NewsletterSubscriber {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String?
+  isActive    Boolean  @default(true)
+  confirmedAt DateTime?
+  token       String?  @unique
+  createdAt   DateTime @default(now())
+
+  @@map("newsletter_subscribers")
+}
+
+// ─── Announcements ───────────────────────────────────────────────────────────
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  type      String   @default("info")
+  link      String?
+  isActive  Boolean  @default(true)
+  startsAt  DateTime @default(now())
+  endsAt    DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("announcements")
+}
+
+// ─── Settings ─────────────────────────────────────────────────────────────────
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  type      String   @default("string") // string | number | boolean | json
+  group     String   @default("general")
+  label     String?
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
