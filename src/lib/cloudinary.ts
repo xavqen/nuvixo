@@ -9,14 +9,22 @@ cloudinary.config({
 
 export { cloudinary };
 
-export async function getSignedPdfUrl(publicId: string, expiresIn = 3600): Promise<string> {
-  const timestamp = Math.floor(Date.now() / 1000) + expiresIn;
-  const signature = cloudinary.utils.api_sign_request(
-    { public_id: publicId, timestamp },
-    process.env.CLOUDINARY_API_SECRET!
-  );
+export async function getSignedPdfUrl(
+  publicId: string,
+  expiresIn = 3600
+): Promise<string> {
+  const expiresAt = Math.floor(Date.now() / 1000) + expiresIn;
 
-  return `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/fl_attachment:false,fl_sanitize/${publicId}.pdf?timestamp=${timestamp}&signature=${signature}&api_key=${process.env.CLOUDINARY_API_KEY}`;
+  return cloudinary.utils.private_download_url(
+    publicId,
+    "pdf",
+    {
+      resource_type: "raw",
+      type: "upload",
+      expires_at: expiresAt,
+      attachment: false,
+    }
+  );
 }
 
 export async function uploadPdf(

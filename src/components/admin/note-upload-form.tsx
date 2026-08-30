@@ -19,6 +19,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { slugify } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { PDFDocument } from "pdf-lib";
 
 const uploadSchema = z.object({
   title: z.string().min(5).max(200),
@@ -79,28 +80,80 @@ export function NoteUploadForm({ classes, subjects, boards, chapters }: Props) {
   const titleValue = form.watch("title");
 
   async function uploadFile(file: File, type: "pdf" | "image") {
+    const sigRes = await fetch("/api/admin/upload-signature", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ type }),
+    });
+
+    if (!sigRes.ok) {
+      throw new Error(await sigRes.text());
+    }
+
+    const sig = await sigRes.json();
+
+    const uploadUrl =
+      `https://api.cloudinary.com/v1_1/${sig.cloudName}/` +
+      `${sig.resourceType}/upload`;
+
     const fd = new FormData();
     fd.append("file", file);
-    fd.append("type", type);
-    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-    if (!res.ok) throw new Error(await res.text());
+    fd.append("api_key", sig.apiKey);
+    fd.append("timestamp", String(sig.timestamp));
+    fd.append("signature", sig.signature);
+    fd.append("folder", sig.folder);
+
+    const res = await fetch(uploadUrl, {
+      method: "POST",
+      body: fd,
+    });
+
+    if (!res.ok) {
+      throw new Error(await res.text());
+    }
+
     return res.json();
   }
 
-  async function handlePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handlePdfUpload(
+    e: React.ChangeEvent<HTMLInputElement>
+  ) {
     const file = e.target.files?.[0];
     if (!file) return;
+
     setPdfUploadState("uploading");
+
     try {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await PDFDocument.load(arrayBuffer, {
+        ignoreEncryption: false,
+      });
+
+      const pages = pdf.getPageCount();
+
+      if (pages < 1) {
+        throw new Error("PDF contains no pages.");
+      }
+
       const data = await uploadFile(file, "pdf");
-      setPdfPublicId(data.publicId);
-      setPreviewPublicId(data.publicId);
-      setTotalPages(data.pages ?? 0);
+
+      setPdfPublicId(data.public_id);
+      setPreviewPublicId(data.public_id);
+      setTotalPages(pages);
       setPdfUploadState("done");
-      toast.success(`PDF uploaded! ${data.pages ?? 0} pages detected.`);
-    } catch {
+
+      toast.success(`PDF uploaded! ${pages} pages detected.`);
+    } catch (error) {
+      console.error(error);
       setPdfUploadState("error");
-      toast.error("PDF upload failed.");
+
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "PDF upload failed."
+      );
     }
   }
 
