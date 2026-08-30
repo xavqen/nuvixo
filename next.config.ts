@@ -19,20 +19,20 @@ const nextConfig: NextConfig = {
     },
   },
   // Added Webpack config to prevent Watchpack from scanning protected D:\ drive folders
-  webpack: (config, { dev }) => {
-    if (dev) {
-      config.watchOptions = {
-        ...config.watchOptions,
-        ignored: [
-          "**/node_modules/**",
-          "D:/System Volume Information/**",
-          "D:/WindowsApps/**",
-          "D:/Config.Msi/**",
-        ],
-      };
-    }
-    return config;
-  },
+  // webpack: (config, { dev }) => {
+  //   if (dev) {
+  //     config.watchOptions = {
+  //       ...config.watchOptions,
+  //       ignored: [
+  //         "**/node_modules/**",
+  //         "D:/System Volume Information/**",
+  //         "D:/WindowsApps/**",
+  //         "D:/Config.Msi/**",
+  //       ],
+  //     };
+  //   }
+  //   return config;
+  // },
   compress: true,
   poweredByHeader: false,
   async headers() {
