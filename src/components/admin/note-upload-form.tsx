@@ -21,47 +21,48 @@ import { slugify } from "@/lib/utils";
 import toast from "react-hot-toast";
 
 const uploadSchema = z.object({
-  title:            z.string().min(5).max(200),
-  slug:             z.string().min(3).regex(/^[a-z0-9-]+$/),
-  description:      z.string().min(20),
+  title: z.string().min(5).max(200),
+  slug: z.string().min(3).regex(/^[a-z0-9-]+$/),
+  description: z.string().min(20),
   shortDescription: z.string().max(300).optional(),
-  classId:          z.string().min(1, "Select a class"),
-  subjectId:        z.string().min(1, "Select a subject"),
-  boardId:          z.string().min(1, "Select a board"),
-  chapterId:        z.string().optional(),
-  language:         z.string().default("ENGLISH"),
-  price:            z.coerce.number().min(0),
-  originalPrice:    z.coerce.number().optional(),
-  isFree:           z.boolean().default(false),
-  isPremium:        z.boolean().default(true),
-  isDownloadable:   z.boolean().default(true),
-  difficulty:       z.enum(["EASY","MEDIUM","HARD"]),
-  isPublished:      z.boolean().default(false),
-  isFeatured:       z.boolean().default(false),
-  tags:             z.string(),
-  metaTitle:        z.string().optional(),
-  metaDescription:  z.string().optional(),
+  classId: z.string().min(1, "Select a class"),
+  subjectId: z.string().min(1, "Select a subject"),
+  boardId: z.string().min(1, "Select a board"),
+  chapterId: z.string().optional(),
+  language: z.string().default("ENGLISH"),
+  price: z.coerce.number().min(0),
+  originalPrice: z.coerce.number().optional(),
+  isFree: z.boolean().default(false),
+  isPremium: z.boolean().default(true),
+  isDownloadable: z.boolean().default(true),
+  difficulty: z.enum(["EASY", "MEDIUM", "HARD"]),
+  isPublished: z.boolean().default(false),
+  isFeatured: z.boolean().default(false),
+  isTrending: z.boolean().default(false), // ADD
+  tags: z.string(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });
 
 type UploadForm = z.infer<typeof uploadSchema>;
 
 interface Props {
-  classes:  { id: string; name: string }[];
+  classes: { id: string; name: string }[];
   subjects: { id: string; name: string }[];
-  boards:   { id: string; name: string }[];
+  boards: { id: string; name: string }[];
   chapters: { id: string; title: string; number: number; bookId: string }[];
 }
 
 export function NoteUploadForm({ classes, subjects, boards, chapters }: Props) {
   const router = useRouter();
-  const [pdfPublicId,     setPdfPublicId]     = useState("");
+  const [pdfPublicId, setPdfPublicId] = useState("");
   const [previewPublicId, setPreviewPublicId] = useState("");
-  const [coverPublicId,   setCoverPublicId]   = useState("");
-  const [coverUrl,        setCoverUrl]        = useState("");
-  const [totalPages,      setTotalPages]      = useState<number>(0);
-  const [pdfUploadState,  setPdfUploadState]  = useState<"idle"|"uploading"|"done"|"error">("idle");
-  const [covUploadState,  setCovUploadState]  = useState<"idle"|"uploading"|"done"|"error">("idle");
-  const [submitting,      setSubmitting]      = useState(false);
+  const [coverPublicId, setCoverPublicId] = useState("");
+  const [coverUrl, setCoverUrl] = useState("");
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [pdfUploadState, setPdfUploadState] = useState<"idle" | "uploading" | "done" | "error">("idle");
+  const [covUploadState, setCovUploadState] = useState<"idle" | "uploading" | "done" | "error">("idle");
+  const [submitting, setSubmitting] = useState(false);
   const pdfRef = useRef<HTMLInputElement>(null);
   const covRef = useRef<HTMLInputElement>(null);
 
@@ -70,14 +71,14 @@ export function NoteUploadForm({ classes, subjects, boards, chapters }: Props) {
     defaultValues: {
       title: "", slug: "", description: "", classId: "", subjectId: "",
       boardId: "", language: "ENGLISH", price: 49, isFree: false, isPremium: true,
-      isDownloadable: true, difficulty: "EASY", isPublished: false, isFeatured: false,
+      isDownloadable: true, difficulty: "EASY", isPublished: false, isFeatured: false, isTrending: false,
       tags: "",
     },
   });
 
   const titleValue = form.watch("title");
 
-  async function uploadFile(file: File, type: "pdf"|"image") {
+  async function uploadFile(file: File, type: "pdf" | "image") {
     const fd = new FormData();
     fd.append("file", file);
     fd.append("type", type);
@@ -149,9 +150,9 @@ export function NoteUploadForm({ classes, subjects, boards, chapters }: Props) {
 
   const UploadStatus = ({ state }: { state: string }) => (
     state === "uploading" ? <Loader2 className="w-5 h-5 animate-spin text-brand-500" />
-    : state === "done"    ? <CheckCircle className="w-5 h-5 text-green-500" />
-    : state === "error"   ? <AlertCircle className="w-5 h-5 text-red-500" />
-    : null
+      : state === "done" ? <CheckCircle className="w-5 h-5 text-green-500" />
+        : state === "error" ? <AlertCircle className="w-5 h-5 text-red-500" />
+          : null
   );
 
   return (
