@@ -53,21 +53,73 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params;
   const { error } = await requireAdmin();
   if (error) return error;
 
-  const note = await prisma.note.findUnique({ where: { id } });
-  if (!note) return NextResponse.json({ error: "Not found." }, { status: 404 });
+  const { id } = await params;
 
-  // Clean up Cloudinary resources
-  if (note.pdfPublicId) await deleteResource(note.pdfPublicId, "raw").catch(() => {});
-  if (note.coverPublicId) await deleteResource(note.coverPublicId).catch(() => {});
-  if (note.previewPublicId) await deleteResource(note.previewPublicId).catch(() => {});
+  const note = await prisma.note.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      pdfPublicId: true,
+      coverPublicId: true,
+      previewPublicId: true,
+      isPublished: true,
+    },
+  });
 
-  await prisma.note.delete({ where: { id } });
-  return NextResponse.json({ success: true });
+  if (!note) {
+    return NextResponse.json(
+      { error: "Note not found" },
+      { status: 404 }
+    );
+  }
+
+  // Never physically delete notes that are referenced by orders.
+  const orderItemCount = await prisma.orderItem.count({
+    where: { noteId: id },
+  });
+
+  if (orderItemCount > 0) {
+    // Soft delete instead
+    await prisma.note.update({
+      where: { id },
+      data: {
+        isPublished: false,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      softDeleted: true,
+      message:
+        "This note has purchase history, so it was unpublished instead of permanently deleted.",
+    });
+  }
+
+  // Safe physical deletion
+  if (note.pdfPublicId) {
+    await deleteResource(note.pdfPublicId, "raw").catch(() => {});
+  }
+
+  if (note.coverPublicId) {
+    await deleteResource(note.coverPublicId).catch(() => {});
+  }
+
+  if (note.previewPublicId) {
+    await deleteResource(note.previewPublicId).catch(() => {});
+  }
+
+  await prisma.note.delete({
+    where: { id },
+  });
+
+  return NextResponse.json({
+    success: true,
+    softDeleted: false,
+  });
 }
